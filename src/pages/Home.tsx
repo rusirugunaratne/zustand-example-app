@@ -1,14 +1,24 @@
 import { Grid2, Typography } from "@mui/material";
 import ItemCard from "../components/ItemCard";
 import { Item, items } from "../data/items";
+import { useCartStore } from "../stores/cartStoreWithDevTools";
 
 const Home = () => {
+  const addItem = useCartStore((state) => state.addItem);
+  const removeItem = useCartStore((state) => state.removeItem);
+
+  // or we can destructure the addItem and removeItem functions from the useCartStore hook
+  //   const { addItem, removeItem } = useCartStore((state) => ({
+  //     addItem: state.addItem,
+  //     removeItem: state.removeItem,
+  //   }));
+
   const onItemAdd = (item: Item) => {
-    console.log(item);
+    addItem(item);
   };
 
   const onItemRemove = (item: Item) => {
-    console.log(item);
+    removeItem(item.id);
   };
 
   return (
